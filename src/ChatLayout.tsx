@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MessageBubble from './MessageBubble';
 import ChatInput from './ChatInput';
-import Sidebar from './Sidebar';
+import {Sidebar} from './Sidebar';
 import { ChevronDown } from 'lucide-react';
 
 interface Message {
@@ -13,7 +13,7 @@ interface Message {
 
 const LoadingSidebar = () => {
   return (
-    <div className="bg-white/95 backdrop-blur-sm p-8 border-l border-gray-200/80 min-h-screen shadow-lg animate-in fade-in duration-500 w-180">
+    <div className="bg-white/95 backdrop-blur-sm p-8 border-l border-gray-200/80 min-h-screen shadow-lg animate-in fade-in duration-500 w-115">
       <div className="mb-10 space-y-3">
         <div className="h-8 w-48 bg-gradient-to-r from-indigo-200 to-purple-200 rounded-lg animate-pulse" />
       </div>
@@ -50,7 +50,7 @@ const LoadingSidebar = () => {
 const ChatLayout = () => {
 
   const [selectedConversation, setSelectedConversation] = useState<number>(1);
-
+  const [selected, setSelected] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [sidebarData, setSidebarData] = useState<any>(null);
@@ -1324,6 +1324,7 @@ const ChatLayout = () => {
   const handleConversationChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedConversationId = parseInt(e.target.value);
     setSelectedConversation(selectedConversationId);
+    setSelected(true);
     let selectedMessages: Message[] = [];
     setLoading(true); 
     // Update the messages based on selected conversation
@@ -1369,6 +1370,12 @@ const ChatLayout = () => {
     const sessionId = "unique-session-id";
 
     try {
+      const nonAIMessages = selectedMessages
+        .filter((msg) => !msg.isAI) // Only user messages
+        .map((msg) => msg.text)
+        .join(" ");
+      const formattedMessage = `[!Important] Always Give Response in JSON Format. This is the Customer queris:\n  ${nonAIMessages}`;
+
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
@@ -1378,9 +1385,9 @@ const ChatLayout = () => {
         },
         body: JSON.stringify({
           user_id: "harshit@lyzr.ai",
-          agent_id: "67986b798560205374fe3940",
-          session_id: sessionId,
-          message: selectedMessages.map(msg => msg.text).join(" "),  
+          agent_id: "679a19238560205374fe6990",
+          session_id: "6a75d7ba-77bc-4040-afc2-f3a762816850",
+          message: formattedMessage,  
         }),
       });
 
@@ -1390,32 +1397,13 @@ const ChatLayout = () => {
 
       const data = await response.json();
       console.log("Response:", data);
-      setSidebarData(data.response);
+      
+      const parsedResponse = JSON.parse(data.response);
+      console.log("Parsed Response:", parsedResponse);
+
+      setSidebarData(parsedResponse);
 
       setLoading(false);
-      // Handle the AI response here, e.g., display it in the chat.
-      const response1 = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "x-api-key": lyzrApiKey,
-        },
-        body: JSON.stringify({
-          user_id: "harshit@lyzr.ai",
-          agent_id: "67986b798560205374fe3940",
-          session_id: sessionId,
-          message: "Hi, I was reading about your high-yield checking account online. Can you tell me more about it Absolutely! It’s a premium checking account offering 2.00% APY on balances up to $10,000. Let me pull up the details.",  
-        }),
-      });
-
-      if (!response1.ok) {
-        throw new Error("Failed to fetch AI response");
-      }
-      console.log("Response2:", response1);
-
-      const data1 = await response1.json();
-      console.log("Response2:", data1);
     } catch (error) {
       console.error("Error:", error);
     }finally {
@@ -1433,9 +1421,12 @@ const ChatLayout = () => {
                          text-gray-700 font-medium text-sm hover:border-blue-300 focus:border-blue-400 
                          focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all cursor-pointer
                          shadow-sm"
-              value={selectedConversation}
+              value={selected? selectedConversation : ""}
               onChange={handleConversationChange}
             >
+              <option value="" disabled className="py-2 text-gray-500">
+                Select a conversation
+              </option>
               {conversationList.map((conversation) => (
                 <option 
                   key={conversation.id} 
@@ -1451,22 +1442,30 @@ const ChatLayout = () => {
             </div>
           </div>
         </div>
-        <div className="flex-1 overflow-y-auto p-6 space-y-4">
-          {messages.map((message) => (
-            <div key={message.id} className="animate-fade-in">
-              <MessageBubble
-                isAI={message.isAI}
-                message={message.text}
-                timestamp={message.timestamp}
-              />
-            </div>
-          ))}
-        </div>
-        <div className="border-t border-gray-100 bg-white/50 backdrop-blur-sm">
-          <div className="mx-auto w-full">
-            <ChatInput onSendMessage={handleSendMessage} />
+        {selected ? (
+          <div className="flex-1 overflow-y-auto p-6 space-y-4">
+            {messages.map((message) => (
+              <div key={message.id} className="animate-fade-in">
+                <MessageBubble
+                  isAI={message.isAI}
+                  message={message.text}
+                  timestamp={message.timestamp}
+                />
+              </div>
+            ))}
           </div>
-        </div>
+        ) : (
+          <div className="flex-1 flex items-center justify-center text-gray-500 text-lg font-semibold">
+            Select a conversation to begin
+          </div>
+        )}
+        {selected && (
+          <div className="border-t border-gray-100 bg-white/50 backdrop-blur-sm">
+            <div className="mx-auto w-full">
+              <ChatInput onSendMessage={handleSendMessage} />
+            </div>
+          </div>
+        )}
       </div>
       {loading ? (
         <LoadingSidebar/>
