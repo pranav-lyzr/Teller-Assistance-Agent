@@ -3,6 +3,7 @@ import MessageBubble from './MessageBubble';
 import ChatInput from './ChatInput';
 import {Sidebar} from './Sidebar';
 import { ChevronDown } from 'lucide-react';
+import logo from './assets/logo.png';
 
 interface Message {
   id: number;
@@ -13,7 +14,7 @@ interface Message {
 
 const LoadingSidebar = () => {
   return (
-    <div className="bg-white/95 backdrop-blur-sm p-8 border-l border-gray-200/80 min-h-screen shadow-lg animate-in fade-in duration-500 w-115">
+    <div className="bg-white/95 backdrop-blur-sm p-8 border-l border-gray-200/80 min-h-screen shadow-lg animate-in fade-in duration-500 w-200">
       <div className="mb-10 space-y-3">
         <div className="h-8 w-48 bg-gradient-to-r from-indigo-200 to-purple-200 rounded-lg animate-pulse" />
       </div>
@@ -1412,15 +1413,43 @@ const ChatLayout = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="flex-1 flex flex-col relative bg-white/80 backdrop-blur-sm">
-      <div className="flex justify-between items-center p-6">
+    <div className="flex flex-col h-screen overflow-hidden">
+      <div className="bg-gradient-to-r from-indigo-200 to-purple-200  text-black py-2 text-center text-sm">
+        <span>Demo App by Lyzr. Need a customized agent? </span>
+        <a 
+          href="https://www.lyzr.ai/book-demo/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="underline font-medium transition-all duration-200 hover:text-indigo-700 hover:bg-white/30 px-2 py-1 rounded-md"
+        >
+          Speak to a specialist
+        </a>
+      </div>
+
+      {/* Navbar */}
+      <div className="bg-white shadow-sm px-6 py-4 border-b border-gray-200">
+        <div className="flex items-center space-x-3">
+          <img 
+            src={logo} 
+            alt="Lyzr Logo" 
+            className="h-8 w-auto"
+          />
+          <h1 className="text-xl font-semibold text-gray-800">
+            Teller Assistance Agent
+          </h1>
+        </div>
+      </div>
+
+      
+      <div className="flex flex-1 overflow-hidden">
+      <div className="flex-1 flex flex-col relative bg-white/80 backdrop-blur-sm  border-b border-gray-600">
+        <div className="flex justify-between items-center p-6  border-b border-gray-100">
           <div className="relative inline-block">
             <select
               className="appearance-none bg-white px-4 py-2.5 pr-10 rounded-xl border border-gray-200 
-                         text-gray-700 font-medium text-sm hover:border-blue-300 focus:border-blue-400 
-                         focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all cursor-pointer
-                         shadow-sm"
+                        text-gray-700 font-medium text-sm hover:border-blue-300 focus:border-blue-400 
+                        focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all cursor-pointer
+                        shadow-sm"
               value={selected? selectedConversation : ""}
               onChange={handleConversationChange}
             >
@@ -1467,12 +1496,17 @@ const ChatLayout = () => {
           </div>
         )}
       </div>
-      {loading ? (
-        <LoadingSidebar/>
-      ) : (
-        <Sidebar data={sidebarData} />
-      )}
+      <div className="bg-gray-50 border-l border-gray-200">
+        {loading ? (
+          <LoadingSidebar/>
+        ) : (
+          <Sidebar data={sidebarData} />
+        )}
+      </div>
+      
+      </div>
     </div>
+    
   );
 };
 

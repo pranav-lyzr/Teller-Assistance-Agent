@@ -7,7 +7,8 @@ interface SearchResult {
 }
 
 interface SidebarData {
-  SearchResults: SearchResult[];
+  SearchResults?: SearchResult[];  // Optional, since data might be in HumanizedContent format
+  HumanizedContent?: SearchResult; // Optional, alternate format
 }
 
 interface SidebarProps {
@@ -32,16 +33,17 @@ const Badge = ({ priority }: { priority: "high" | "medium" }) => {
 // DocumentCard Component
 const DocumentCard = ({
   title,
+  answer,
   type = "DOCUMENT",
   priority = "high",
   url,
 }: {
   title: string;
+  answer: string;
   type?: string;
   priority?: "high" | "medium";
   url: string;
 }) => {
-  
   return (
     <div className="p-4 bg-white rounded-lg border border-gray-100 hover:shadow-md transition-all duration-200">
       <div className="flex items-start justify-between mb-2">
@@ -56,6 +58,11 @@ const DocumentCard = ({
         </div>
         <Badge priority={priority} />
       </div>
+
+      {/* Answer Section */}
+      <p className="text-sm text-gray-700 mt-2">{answer}</p>
+
+      {/* Document Link */}
       <a
         href={url}
         target="_blank"
@@ -70,8 +77,15 @@ const DocumentCard = ({
 
 // Sidebar Component
 export const Sidebar = ({ data }: SidebarProps) => {
+  // Normalize data: If `HumanizedContent` exists, convert it into an array for uniform processing
+  const normalizedResults = data?.SearchResults
+    ? data.SearchResults
+    : data?.HumanizedContent
+    ? [data.HumanizedContent]
+    : [];
+
   return (
-    <div className="w-full max-w-md border-l border-gray-200 bg-gray-50 h-screen overflow-y-auto">
+    <div className="w-200 border-l border-gray-200 bg-gray-50 h-screen overflow-y-auto">
       <div className="p-6">
         <div className="flex items-center gap-2 mb-6">
           <Search className="w-5 h-5 text-gray-500" />
@@ -81,12 +95,13 @@ export const Sidebar = ({ data }: SidebarProps) => {
         </div>
 
         {/* Show message if no results found */}
-        {data?.SearchResults?.length > 0 ? (
+        {normalizedResults.length > 0 ? (
           <div className="space-y-4">
-            {data.SearchResults.map((result, index) => (
+            {normalizedResults.map((result, index) => (
               <DocumentCard
                 key={index}
                 title={result.Document_Title}
+                answer={result.Answer}
                 url={result.URL}
                 priority={index < 2 ? "high" : "medium"}
               />
