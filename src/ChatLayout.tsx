@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MessageBubble from './MessageBubble';
 import ChatInput from './ChatInput';
 import {Sidebar} from './Sidebar';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Info } from 'lucide-react';
 import logo from './assets/main logo.png';
 
 interface Message {
@@ -16,7 +16,7 @@ const LoadingSidebar = () => {
   return (
     <div className="bg-white/95 backdrop-blur-sm p-8 border-l border-gray-200/80 min-h-screen shadow-lg animate-in fade-in duration-500 w-250">
       <div className="mb-10 space-y-3">
-        <div className="h-8 w-48 bg-gradient-to-r from-indigo-200 to-purple-200 rounded-lg animate-pulse" />
+        <div className="h-8 w-48 bg-gray-200 rounded-lg animate-pulse" />
       </div>
       <div className="space-y-8">
         {/* Simulate content sections */}
@@ -1419,22 +1419,36 @@ const ChatLayout = () => {
       </div>
 
       <div className="bg-white shadow-sm px-6 py-4 border-b border-gray-200">
+      <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <img 
             src={logo} 
             alt="Bank Icon" 
             className="h-12 w-auto pr-2 border-r border-r-[#9d9d9d]"
           />
-          <div className=" items-baseline space-x-1">
+          <div className="items-baseline space-x-1">
             <h1 className="text-l font-bold text-gray-900">
               Teller Assistance
             </h1> 
             <h1 className="text-2xl -mt-2 font-bold text-purple-500">
-               Agent
+              Agent
             </h1>
           </div>
         </div>
+        
+        <div className="relative group">
+          <Info className="h-5 w-5 text-gray-500 cursor-help" />
+          <div className="absolute z-10 right-0 w-72 px-4 py-3 mt-2 bg-gray-50 border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 text-sm text-gray-600">
+            <p className="font-medium mb-2">How It Works:</p>
+            <ul className="space-y-2">
+              <li>• Left Panel: Select a conversation from the dropdown. Conversations will load sequentially.</li>
+              <li>• Right Panel: As the conversation progresses, relevant search results and document links will appear dynamically.</li>
+              <li>• Chat Feature: Disabled in this demo. The agent functions in a read-only mode for now.</li>
+            </ul>
+          </div>
+        </div>
       </div>
+    </div>
 
       
       <div className="flex flex-1 overflow-hidden">
