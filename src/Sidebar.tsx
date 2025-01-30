@@ -85,7 +85,7 @@ export const Sidebar = ({ data }: SidebarProps) => {
     : [];
 
   return (
-    <div className="w-200 border-l border-gray-200 bg-white h-screen overflow-y-auto">
+    <div className="w-250 border-l border-gray-200 bg-white h-screen overflow-y-auto">
       <div className="p-6">
         
 

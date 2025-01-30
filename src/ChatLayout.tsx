@@ -14,7 +14,7 @@ interface Message {
 
 const LoadingSidebar = () => {
   return (
-    <div className="bg-white/95 backdrop-blur-sm p-8 border-l border-gray-200/80 min-h-screen shadow-lg animate-in fade-in duration-500 w-200">
+    <div className="bg-white/95 backdrop-blur-sm p-8 border-l border-gray-200/80 min-h-screen shadow-lg animate-in fade-in duration-500 w-250">
       <div className="mb-10 space-y-3">
         <div className="h-8 w-48 bg-gradient-to-r from-indigo-200 to-purple-200 rounded-lg animate-pulse" />
       </div>
@@ -1442,7 +1442,7 @@ const ChatLayout = () => {
 
       
       <div className="flex flex-1 overflow-hidden">
-      <div className="flex-1 flex flex-col relative bg-white/80 backdrop-blur-sm  border-b border-gray-600">
+      <div className="flex-1 flex flex-col relative bg-white/80 backdrop-blur-sm  border-b border-gray-600 w-max[50%]">
         <div className="flex justify-between items-center p-6  border-b border-gray-100 bf-gray-50">
           <div className="relative inline-block">
             <select
