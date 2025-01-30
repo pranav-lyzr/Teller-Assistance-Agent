@@ -1414,13 +1414,13 @@ const ChatLayout = () => {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <div className="bg-gradient-to-r from-indigo-200 to-purple-200  text-black py-2 text-center text-sm">
+      <div className="bg-[#7b43db18]  text-black py-2 text-center text-sm">
         <span>Demo App by Lyzr. Need a customized agent? </span>
         <a 
           href="https://www.lyzr.ai/book-demo/" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="underline font-medium transition-all duration-200 hover:text-indigo-700 hover:bg-white/30 px-2 py-1 rounded-md"
+          className="underline font-medium transition-all duration-200 hover:text-indigo-700 hover:bg-white/30 px-2 py-1 rounded-md text-blue-600"
         >
           Speak to a specialist
         </a>
@@ -1443,7 +1443,7 @@ const ChatLayout = () => {
       
       <div className="flex flex-1 overflow-hidden">
       <div className="flex-1 flex flex-col relative bg-white/80 backdrop-blur-sm  border-b border-gray-600">
-        <div className="flex justify-between items-center p-6  border-b border-gray-100">
+        <div className="flex justify-between items-center p-6  border-b border-gray-100 bf-gray-50">
           <div className="relative inline-block">
             <select
               className="appearance-none bg-white px-4 py-2.5 pr-10 rounded-xl border border-gray-200 
@@ -1472,7 +1472,7 @@ const ChatLayout = () => {
           </div>
         </div>
         {selected ? (
-          <div className="flex-1 overflow-y-auto p-6 space-y-4">
+          <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50">
             {messages.map((message) => (
               <div key={message.id} className="animate-fade-in">
                 <MessageBubble
@@ -1484,17 +1484,17 @@ const ChatLayout = () => {
             ))}
           </div>
         ) : (
-          <div className="flex-1 flex items-center justify-center text-gray-500 text-lg font-semibold">
+          <div className="flex-1 flex items-center justify-center text-gray-500 text-sm font-semibold">
             Select a conversation to begin
           </div>
         )}
-        {selected && (
-          <div className="border-t border-gray-100 bg-white/50 backdrop-blur-sm">
+        {/* {selected && (
+          <div className="border-t border-gray-100 bg-white/50 backdrop-blur-sm h-16">
             <div className="mx-auto w-full">
-              <ChatInput onSendMessage={handleSendMessage} />
+              <ChatInput onSendMessage={handleSendMessage} /> 
             </div>
           </div>
-        )}
+        )} */}
       </div>
       <div className="bg-gray-50 border-l border-gray-200">
         {loading ? (
