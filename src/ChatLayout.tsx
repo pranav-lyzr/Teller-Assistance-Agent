@@ -1484,7 +1484,7 @@ const ChatLayout = () => {
             ))}
           </div>
         ) : (
-          <div className="flex-1 flex items-center justify-center text-gray-500 text-sm font-semibold">
+          <div className="flex-1 flex items-center justify-center text-gray-500 text-sm font-semibold bg-gray-50">
             Select a conversation to begin
           </div>
         )}
