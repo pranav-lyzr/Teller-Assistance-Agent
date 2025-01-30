@@ -1366,8 +1366,8 @@ const ChatLayout = () => {
     }
     setMessages(selectedMessages);
 
-    const apiUrl = "https://agent.api.lyzr.app/v2/chat/";
-    const lyzrApiKey = "lyzr-eH51wUqvcJY5fRl9yFZihZIx";
+    const apiUrl = "https://agent-prod.studio.lyzr.ai/v3/inference/chat/";
+    const lyzrApiKey = "sk-default-pIroXlBh1nMTJb3DfpbaLYGus5l9JoCi";
     const sessionId = "unique-session-id";
 
     try {
@@ -1385,9 +1385,9 @@ const ChatLayout = () => {
           "x-api-key": lyzrApiKey,
         },
         body: JSON.stringify({
-          user_id: "harshit@lyzr.ai",
-          agent_id: "679a19238560205374fe6990",
-          session_id: "6a75d7ba-77bc-4040-afc2-f3a762816850",
+          agent_id:"679b0359fd594d277677a24a",
+          user_id:"prajjwal@lyzr.ai",
+          session_id:"prajjwal@lyzr.ai",
           message: formattedMessage,  
         }),
       });
