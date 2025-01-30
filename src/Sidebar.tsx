@@ -115,8 +115,7 @@ export const Sidebar = ({ data }: SidebarProps) => {
             <div className="mb-8">
               <h1 className="text-2xl font-semibold mb-2">AI Assistant</h1>
               <p className="text-gray-600 text-sm">
-                I analyze your messages and provide relevant information along with helpful references. Each response is tailored
-                to your specific needs.
+              Hi, I am your Teller Assistant. I analyze customer interactions and provide relevant information and references to enhance your service experience.
               </p>
             </div>
 

@@ -3,7 +3,7 @@ import MessageBubble from './MessageBubble';
 import ChatInput from './ChatInput';
 import {Sidebar} from './Sidebar';
 import { ChevronDown } from 'lucide-react';
-import logo from './assets/logo.png';
+import logo from './assets/main logo.png';
 
 interface Message {
   id: number;
@@ -50,7 +50,7 @@ const LoadingSidebar = () => {
 
 const ChatLayout = () => {
 
-  const [selectedConversation, setSelectedConversation] = useState<number>(1);
+  const [selectedConversation, setSelectedConversation] = useState<number | null>(null);
   const [selected, setSelected] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -1414,29 +1414,25 @@ const ChatLayout = () => {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <div className="bg-[#7b43db18]  text-black py-2 text-center text-sm">
-        <span>Demo App by Lyzr. Need a customized agent? </span>
-        <a 
-          href="https://www.lyzr.ai/book-demo/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="underline font-medium transition-all duration-200 hover:text-indigo-700 hover:bg-white/30 px-2 py-1 rounded-md text-blue-600"
-        >
-          Speak to a specialist
-        </a>
+      <div className="bg-[#f7f2fe] h-8  w-full mx-auto">
+        <p className="text-sm text-[#292929] font-semibold mt-1.5 text-center mx-auto">Demo App by Lyzr. Need a customized agent?<a target="_blank" href="https://www.lyzr.ai/book-demo/" className="text-purple-500 font-semibold border-2 border-purple-400 cursor-pointer bg-[#ffffff] p-1 px-1.5 rounded-xl hover:text-[#8923e8]  hover:shadow-lg ml-2">Speak to a specialist</a></p>
       </div>
 
-      {/* Navbar */}
       <div className="bg-white shadow-sm px-6 py-4 border-b border-gray-200">
         <div className="flex items-center space-x-3">
           <img 
             src={logo} 
-            alt="Lyzr Logo" 
-            className="h-8 w-auto"
+            alt="Bank Icon" 
+            className="h-12 w-auto pr-2 border-r border-r-[#9d9d9d]"
           />
-          <h1 className="text-xl font-semibold text-gray-800">
-            Teller Assistance Agent
-          </h1>
+          <div className=" items-baseline space-x-1">
+            <h1 className="text-l font-bold text-gray-900">
+              Teller Assistance
+            </h1> 
+            <h1 className="text-2xl -mt-2 font-bold text-purple-500">
+               Agent
+            </h1>
+          </div>
         </div>
       </div>
 
@@ -1450,10 +1446,19 @@ const ChatLayout = () => {
                         text-gray-700 font-medium text-sm hover:border-blue-300 focus:border-blue-400 
                         focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all cursor-pointer
                         shadow-sm"
-              value={selected? selectedConversation : ""}
-              onChange={handleConversationChange}
+              value={selectedConversation || ""}
+              onChange={(e) => {
+                const selectedId = e.target.value ? parseInt(e.target.value) : null;
+                if (selectedId === null) {
+                  setSelectedConversation(null);
+                  setMessages([]);
+                  setSidebarData([]);
+                } else {
+                  handleConversationChange(e);
+                }
+              }}
             >
-              <option value="" disabled className="py-2 text-gray-500">
+              <option value="" className="py-2 text-gray-500">
                 Select a conversation
               </option>
               {conversationList.map((conversation) => (
@@ -1466,6 +1471,7 @@ const ChatLayout = () => {
                 </option>
               ))}
             </select>
+
             <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
               <ChevronDown className="h-4 w-4 text-gray-400" />
             </div>
