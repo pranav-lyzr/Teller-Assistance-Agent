@@ -1441,9 +1441,9 @@ const ChatLayout = () => {
           <div className="absolute z-10 right-0 w-72 px-4 py-3 mt-2 bg-gray-50 border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 text-sm text-gray-600">
             <p className="font-medium mb-2">How It Works:</p>
             <ul className="space-y-2">
-              <li>• Left Panel: Select a conversation from the dropdown. Conversations will load sequentially.</li>
-              <li>• Right Panel: As the conversation progresses, relevant search results and document links will appear dynamically.</li>
-              <li>• Chat Feature: Disabled in this demo. The agent functions in a read-only mode for now.</li>
+              <li>The left screen displays the customer-teller conversation, while the AI assistant on the right provides real-time search results, policies, and product details for quick, compliant responses.</li>
+              {/* <li>• Right Panel: As the conversation progresses, relevant search results and document links will appear dynamically.</li> */}
+              <li>Chat Feature: Disabled in this demo (read-only mode)</li>
             </ul>
           </div>
         </div>
