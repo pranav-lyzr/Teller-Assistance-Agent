@@ -1385,7 +1385,7 @@ const ChatLayout = () => {
           "x-api-key": lyzrApiKey,
         },
         body: JSON.stringify({
-          agent_id:"679b0359fd594d277677a24a",
+          agent_id:"679c7eb674347e37fc1fe746",
           user_id:"prajjwal@lyzr.ai",
           session_id:"prajjwal@lyzr.ai",
           message: formattedMessage,  
