@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import MessageBubble from './MessageBubble';
 import ChatInput from './ChatInput';
 import {Sidebar} from './Sidebar';
@@ -55,6 +55,14 @@ const ChatLayout = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [sidebarData, setSidebarData] = useState<any>(null);
+  const [visibleMessages, setVisibleMessages] = useState<Message[]>([]);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [visibleMessages]);
+  
 
   const [messages_4, setMessages_4] = useState<Message[]>([
     {
@@ -1322,6 +1330,17 @@ const ChatLayout = () => {
     }, 1000);
   };
 
+  const loadMessagesWithDelay = (messages: Message[]) => {
+    setVisibleMessages([]); // Reset visible messages
+    
+    messages.forEach((message, index) => {
+      setTimeout(() => {
+        setVisibleMessages(prev => [...prev, message]);
+      }, index * 1000); // 800ms delay between each message
+    });
+  };
+  
+
   const handleConversationChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedConversationId = parseInt(e.target.value);
     setSelectedConversation(selectedConversationId);
@@ -1365,7 +1384,7 @@ const ChatLayout = () => {
         break;
     }
     setMessages(selectedMessages);
-
+    loadMessagesWithDelay(selectedMessages);
     const apiUrl = "https://agent-prod.studio.lyzr.ai/v3/inference/chat/";
     const lyzrApiKey = "sk-default-pIroXlBh1nMTJb3DfpbaLYGus5l9JoCi";
     const sessionId = "unique-session-id";
@@ -1398,8 +1417,9 @@ const ChatLayout = () => {
 
       const data = await response.json();
       console.log("Response:", data);
-      
-      const parsedResponse = JSON.parse(data.response);
+      const cleanedResponse = data.response.replace(/^```json|```$/g, "").trim();
+
+      const parsedResponse = JSON.parse(cleanedResponse);
       console.log("Parsed Response:", parsedResponse);
 
       setSidebarData(parsedResponse);
@@ -1493,16 +1513,18 @@ const ChatLayout = () => {
         </div>
         {selected ? (
           <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50">
-            {messages.map((message) => (
+            {visibleMessages.map((message) => (
               <div key={message.id} className="animate-fade-in">
                 <MessageBubble
                   isAI={message.isAI}
                   message={message.text}
                   timestamp={message.timestamp}
                 />
+                {/* <div ref={messagesEndRef} /> */}
               </div>
             ))}
           </div>
+          
         ) : (
           <div className="flex-1 flex items-center justify-center text-gray-500 text-sm font-semibold bg-gray-50">
             Select a conversation to begin
