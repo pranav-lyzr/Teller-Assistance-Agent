@@ -1296,6 +1296,160 @@ const ChatLayout = () => {
     }
   ]);
 
+  const conversationResponseList = [
+    { id: 1, heading: "Wire Transfers (Domestic or International)", ai_assistant: {
+      "SearchResults": [
+        {
+          "URL": "https://docs.google.com/document/d/1EqALFbcNCldgLd-TsLoPAfG6whd5wfiF/edit?usp=sharing",
+          "Answer": [
+            "International wire transfers typically cost $40–$60, excluding currency conversion charges.",
+            "A legitimate request for a wire transfer requires thorough identity verification of the sender.",
+            "Full legal name, account number, SWIFT/BIC code, and IBAN are required for international transfers.",
+            "A unique reference number is generated upon successful initiation, and wire records are retained for at least five years.",
+            "Notifications or confirmations of transfer may be communicated via email upon customer request."
+          ],
+          "Document_Title": "Domestic & International Wire Transfer Policy & Procedures"
+        }
+      ]
+    } },
+    { id: 2, heading: "Unauthorized Charge Dispute", ai_assistant: {
+      "SearchResults": [
+        {
+          "URL": "https://docs.google.com/document/d/1ORrN89UohMLXLHkT2el-zmy-u1d-42im/edit?usp=sharing",
+          "Answer": [
+            "Deposits exceeding $5,000, especially from less familiar institutions, may have extended holds.",
+            "Standard hold timeframe is five to seven business days, but may vary based on risk factors.",
+            "Long-standing customers with stable account histories might receive a partial or expedited release of funds.",
+            "Prompt disclosure of any extended hold is required at the time of deposit.",
+            "Branch managers may approve waivers or expedited releases for large deposits after assessing the account."
+          ],
+          "Document_Title": "Check Deposit Holds & Large Deposit Policy"
+        }
+      ]
+    } },
+    { id: 3, heading: "Loan and Credit Card Inquiries", ai_assistant: {
+      "SearchResults": [
+        {
+          "URL": "https://docs.google.com/document/d/1z6ECKt__wHNx5nTBeFKUaoZxDipUKpzU/edit?usp=sharing",
+          "Answer": [
+            "Unsecured personal loans typically range from $1,000 to $50,000.",
+            "Rates are determined by factors such as credit score, debt-to-income ratio, and loan term.",
+            "A credit score of 720 is generally favorable for obtaining competitive rates.",
+            "Loan repayment terms can vary, often extending up to several years.",
+            "Applicants must submit proof of income, such as pay stubs or W-2 forms.",
+            "The approval process may vary but is structured to be relatively quick."
+          ],
+          "Document_Title": "Consumer Loan & Credit Card Product Overview"
+        }
+      ]
+    } },
+    { id: 4, heading: "New Product Inquiries or Cross-Selling", ai_assistant: {
+      "SearchResults": [
+        {
+          "URL": "https://docs.google.com/document/d/11r8cYYvTtB2mEWGxweSuqBB95pNtPkAl/edit?usp=sharing",
+          "Answer": [
+            "High-yield checking accounts provide elevated annual percentage yields (APYs) up to a specified tier (e.g., first $10,000).",
+            "Customers are typically required to maintain a minimum daily balance or meet other conditions such as regular direct deposit to qualify for the promotional APY.",
+            "Balances above the specified limit may earn a lower rate.",
+            "The account can be opened promptly following standard Know Your Customer (KYC) procedures, with no waiting period required.",
+            "Free or discounted checks may be included depending on the account package chosen."
+          ],
+          "Document_Title": "High-Yield Checking & Premium Account Guidance"
+        }
+      ]
+    } },
+    { id: 5, heading: "Fee Waivers and Exception Requests", ai_assistant: {
+      "SearchResults": [
+        {
+          "URL": "https://docs.google.com/document/d/12ExyW2U-zo7PADjmKErd3OdL3fdJBWYH/edit?usp=sharing",
+          "Answer": [
+            "Customers with limited overdraft history may qualify for a one-time courtesy fee waiver within a rolling 12-month period.",
+            "Branch managers or higher-level officers can authorize additional fee reversals for customers with larger relationships or under extenuating circumstances.",
+            "All waivers must be documented with a reason code in the bank's systems for audit and compliance purposes.",
+            "Customers should be guided on how to avoid future overdrafts (e.g., setting up alerts or linking a savings account).",
+            "If a waiver request is not approved, it is important to discuss options for avoiding future fees."
+          ],
+          "Document_Title": "Overdraft & Fee Waiver Policies"
+        }
+      ]
+    } },
+    { id: 6, heading: "Complex Account Services (e.g., Business Accounts)", ai_assistant: {
+      "SearchResults": [
+        {
+          "URL": "https://docs.google.com/document/d/1puRi_efQNjGBuyEempujY2McyzoyG5OG/edit?usp=sharing",
+          "Answer": [
+            "To open a business checking account for an LLC, you typically need the Articles of Organization and an EIN (Employer Identification Number) from the IRS.",
+            "You may also need an Operating Agreement or corporate resolution naming authorized signers.",
+            "For small transaction volumes, it's important to understand the fee structure and any monthly fees if transaction limits are exceeded.",
+            "Verification of identity (such as a driver's license) is required to complete the account setup.",
+            "Checks can be ordered, and it's advisable to start with a small batch if transactions are minimal initially."
+          ],
+          "Document_Title": "Business Account & LLC Requirements"
+        }
+      ]
+    } },
+    { id: 7, heading: "Specialized Savings or CD Products", ai_assistant: {
+      "SearchResults": [
+        {
+          "URL": "https://docs.google.com/document/d/1nM8NxmmFUbtR6Wzs5N3V7wVqBhk2O-1z/edit?usp=sharing",
+          "Answer": [
+            "Standard CD terms range from three months to five years, with rates adjusted based on market conditions.",
+            "A special 15-month CD promotional rate might be available, offering a higher interest rate for a limited deposit window.",
+            "Early withdrawal penalties apply, typically amounting to 90 days' interest for CDs under one year and potentially more for longer terms.",
+            "CDs usually renew automatically into a similar term at the current rate unless otherwise instructed.",
+            "During a grace period after maturity, you can withdraw or change terms without penalty."
+          ],
+          "Document_Title": "Certificates of Deposit (CD) & Specialized Savings Policy"
+        }
+      ]
+    } },
+    { id: 8, heading: "Fraud Alerts or Disputes", ai_assistant: {
+      "SearchResults": [
+        {
+          "URL": "https://docs.google.com/document/d/1v9ZrJlfI7P2lfsDiaMtAp5IK7qlgr5os/edit?usp=sharing",
+          "Answer": [
+            "Contact the bank via phone, online banking, or in person to file a dispute.",
+            "Complete a dispute form and ensure identity verification to confirm legitimacy.",
+            "Provisional credit is typically granted within 10 business days once you are deemed eligible.",
+            "If the charge is found to be fraudulent, the provisional credit becomes permanent.",
+            "If the charge is determined to be legitimate, the provisional credit will be reversed."
+          ],
+          "Document_Title": "Fraud Alerts & Dispute Handling Procedures"
+        }
+      ]
+    } },
+    { id: 9, heading: "Large Cash Transactions / Compliance (CTR)", ai_assistant: {
+      "SearchResults": [
+        {
+          "URL": "https://docs.google.com/document/d/1ysErjEnrjXP7Ubw4Px9vb6qRj3mZcVem/edit?usp=sharing",
+          "Answer": [
+            "A Currency Transaction Report (CTR) is required for cash withdrawals exceeding $10,000 in a single day.",
+            "Customers withdrawing more than $10,000 must provide their full legal name, government-issued ID information, and occupation or business nature.",
+            "The CTR is transmitted to FinCEN within the required time frame—usually 15 calendar days.",
+            "Some customers may be exempt from CTR filings if they are recognized as established, low-risk businesses with routine large cash operations."
+          ],
+          "Document_Title": "Large Cash Transactions & CTR (Currency Transaction Report) Guidelines"
+        }
+      ]
+    } },
+    { id: 0, heading: "Special Exceptions (Medallion Signature Guarantee, Notary)", ai_assistant: {
+      "SearchResults": [
+        {
+          "URL": "https://docs.google.com/document/d/1wbUwBYCUyCn4ZJBzLhlwTg9-_cRV7fIL/edit?usp=sharing",
+          "Answer": [
+            "The Medallion Signature Guarantee (MSG) service is available for stock transfer forms.",
+            "Customers must provide a driver's license and the latest brokerage statement.",
+            "Active checking or savings account with the bank is required to avail the service.",
+            "Multiple signatures can be guaranteed if needed.",
+            "There is typically no fee for this service for bank customers."
+          ],
+          "Document_Title": "Specialized Services: Medallion Signature Guarantee & Notary Procedures"
+        }
+      ]
+    } },
+  ];
+
+
   const conversationList = [
     { id: 1, heading: "Wire Transfers (Domestic or International)" },
     { id: 2, heading: "Unauthorized Charge Dispute" },
@@ -1389,48 +1543,63 @@ const ChatLayout = () => {
     const lyzrApiKey = "sk-default-pIroXlBh1nMTJb3DfpbaLYGus5l9JoCi";
     const sessionId = "unique-session-id";
 
-    try {
-      const nonAIMessages = selectedMessages
-        .filter((msg) => !msg.isAI) // Only user messages
-        .map((msg) => msg.text)
-        .join(" ");
-      const formattedMessage = `[!Important] Always Give Response in JSON Format. This is the Customer queris:\n  ${nonAIMessages}`;
+    // try {
+    //   const nonAIMessages = selectedMessages
+    //     .filter((msg) => !msg.isAI) // Only user messages
+    //     .map((msg) => msg.text)
+    //     .join(" ");
+    //   const formattedMessage = `[!Important] Always Give Response in JSON Format. This is the Customer queris:\n  ${nonAIMessages}`;
 
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "x-api-key": lyzrApiKey,
-        },
-        body: JSON.stringify({
-          agent_id:"679c7eb674347e37fc1fe746",
-          user_id:"prajjwal@lyzr.ai",
-          session_id:"prajjwal@lyzr.ai",
-          message: formattedMessage,  
-        }),
-      });
+    //   const response = await fetch(apiUrl, {
+    //     method: "POST",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json",
+    //       "x-api-key": lyzrApiKey,
+    //     },
+    //     body: JSON.stringify({
+    //       agent_id:"679c7eb674347e37fc1fe746",
+    //       user_id:"prajjwal@lyzr.ai",
+    //       session_id:"prajjwal@lyzr.ai",
+    //       message: formattedMessage,  
+    //     }),
+    //   });
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch AI response");
+    //   if (!response.ok) {
+    //     throw new Error("Failed to fetch AI response");
+    //   }
+
+    //   const data = await response.json();
+    //   console.log("Response:", data);
+    //   const cleanedResponse = data.response.replace(/^```json|```$/g, "").trim();
+
+    //   const parsedResponse = JSON.parse(cleanedResponse);
+    //   console.log("Parsed Response:", parsedResponse);
+
+    //   setSidebarData(parsedResponse);
+
+    //   setLoading(false);
+    // } catch (error) {
+    //   console.error("Error:", error);
+    // }finally {
+    //   setLoading(false); // Stop loading after the request is complete
+    // }
+
+    setTimeout(() => {
+      const selectedResponse = conversationResponseList.find(
+        (conversation) => conversation.id === selectedConversationId
+      );
+  
+      if (selectedResponse) {
+        setSidebarData(selectedResponse.ai_assistant);
+      } else {
+        setSidebarData(null);
       }
-
-      const data = await response.json();
-      console.log("Response:", data);
-      const cleanedResponse = data.response.replace(/^```json|```$/g, "").trim();
-
-      const parsedResponse = JSON.parse(cleanedResponse);
-      console.log("Parsed Response:", parsedResponse);
-
-      setSidebarData(parsedResponse);
-
+  
       setLoading(false);
-    } catch (error) {
-      console.error("Error:", error);
-    }finally {
-      setLoading(false); // Stop loading after the request is complete
-    }
-  };
+    }, 5000);
+
+  };  
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
